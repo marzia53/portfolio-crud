@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -56,24 +57,28 @@ class ProjectController extends Controller
     // 6. Persist updates to a project
     public function update(Request $request, Project $project)
     {
-        $data = $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'project_url' => 'nullable|url',
-            'image'       => 'nullable|image',
-            'status'      => 'required|in:draft,published',
-        ]);
+        
+    $data = $request->validate([
+        'title'       => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'project_url' => 'nullable|url',
+        'image'       => 'nullable|image',
+        'status'      => 'required|in:draft,published',
+    ]);
 
-        if ($request->hasFile('image')) {
-            // delete old image? \Storage::disk('public')->delete($project->image);
-            $data['image'] = $request->file('image')->store('projects','public');
-        }
+    if ($request->hasFile('image')) {
+        // Delete old image
+        Storage::disk('public')->delete($project->image);
 
-        $project->update($data);
+        // Store new one
+        $data['image'] = $request->file('image')->store('projects','public');
+    }
 
-        return redirect()
-            ->route('projects.show', $project)
-            ->with('success', 'Project updated successfully.');
+    $project->update($data);
+
+    return redirect()
+        ->route('projects.show', $project)
+        ->with('success', 'Project updated successfully.');
     }
 
     // 7. Delete a project
