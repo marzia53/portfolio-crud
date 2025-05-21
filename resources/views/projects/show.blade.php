@@ -9,7 +9,7 @@
     <div class="card">
         @if($project->image)
             <img 
-                src="{{ asset('storage/' . $project->image) }}" 
+                src="{{ asset('storage/' . $project->image) }}"
                 class="card-img-top" 
                 alt="{{ $project->title }}"
             >
