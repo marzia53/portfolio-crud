@@ -85,10 +85,17 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         // optionally delete image: \Storage::disk('public')->delete($project->image);
-        $project->delete();
-
-        return redirect()
-            ->route('projects.index')
-            ->with('success', 'Project deleted successfully.');
+       
+            // Delete image file
+            Storage::disk('public')->delete($project->image);
+        
+            // Delete record
+            $project->delete();
+        
+            return redirect()
+                ->route('projects.index')
+                ->with('success', 'Project deleted successfully.');
+        
+        
     }
 }
