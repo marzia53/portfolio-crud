@@ -16,11 +16,11 @@ A simple Laravel-based CRUD application for managing portfolio projects.
 
 1. *Clone the repository*  
    in terminal -
-   git clone https://github.com/marzia53/portfolio-crud.git
-   cd portfolio-crud
+   -git clone https://github.com/marzia53/portfolio-crud.git
+   -cd portfolio-crud
 
 2. *Install PHP dependencies*
-   composer install
+   -composer install
 
 3. *Configure your environment file*
    DB_CONNECTION=mysql
@@ -31,7 +31,7 @@ A simple Laravel-based CRUD application for managing portfolio projects.
    DB_PASSWORD=root
 
 4. *Generate application key*
-   php artisan key:generate
+   -php artisan key:generate
 
 5. *Create the database*
    Using MAMP’s phpMyAdmin:
@@ -55,8 +55,13 @@ Database name: portfolio_db
 
 ## Usage
 
-    -List projects: GET /projects
-    -Create project: GET /projects/create
-    -View a project: GET /projects/{id}
-    -Edit a project: GET /projects/{id}/edit
-    -Delete a project: DELETE /projects/{id}
+    - List projects: GET /projects
+    - Create project: GET /projects/create
+    - View a project: GET /projects/{id}
+    - Edit a project: GET /projects/{id}/edit
+    - Delete a project: DELETE /projects/{id}
+
+ ## Notes
+
+    - Users can do basic crud operations
+    - Projects images which are updated or deleted, those are completely deleted from project directory to avoid redundancy 
